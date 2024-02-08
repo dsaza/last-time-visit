@@ -14,7 +14,7 @@ app.post('/visit', async (c) => {
   const { country, city, flag } = await c.req.json()
 
   await db.atomic()
-    .set(['lastVisit'], { country, city, flag })
+    .set(['lastVisit'], { country, city, flag, date: Date.now().toString() })
     .sum(['visits'], 1n)
     .commit()
 

@@ -86,10 +86,11 @@
       source.addEventListener('update', (event) => {
         if (ready === false) return
 
-        const { country, city, flag } = JSON.parse(event.data)
-        const message = `Last visit from ${city}, ${country} ${flag}`
+        const { country, city, flag, date } = JSON.parse(event.data)
+        
+        const currentDate = new Date(Number(date))
+        const message = `Last visit from ${city}, ${country} ${flag} at ${currentDate.toLocaleString()}`
         const isLastEmpty = $last.innerHTML === ''
-        console.log(isLastEmpty)
 
         if (isLastEmpty) {
           $last.innerHTML = message
